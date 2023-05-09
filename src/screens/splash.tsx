@@ -1,42 +1,26 @@
-import React, {useState, useEffect} from 'react';
-import {
-  ActivityIndicator,
-  Image,
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  StyleSheet,
-  BackHandler,
-  ImageBackground,
-  TextInput,
-} from 'react-native';
-import {SvgXml} from 'react-native-svg';
-import {BlurView} from '@react-native-community/blur';
+import React, { useState, useEffect } from "react";
+import { Text, View, StyleSheet, BackHandler } from "react-native";
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
-import Icon from 'react-native-vector-icons/Entypo';
+} from "react-native-responsive-screen";
+import Icon from "react-native-vector-icons/Entypo";
 
-import {colors} from '../theme/colors';
+import { colors } from "../theme/colors";
+import { useFocusEffect } from "@react-navigation/native";
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {CommonActions, useFocusEffect} from '@react-navigation/native';
+export const Splash = ({ navigation }: any) => {
+  useEffect(
+    () => {
+      const timeoutId = setTimeout(() => {
+        navigation.navigate("Login");
+      }, 1000);
 
-export const Splash = ({navigation}: any) => {
-  const [load, setLoad] = useState(false);
-  const [selectedButton, setSelectedButton] = useState('');
-  const [password, setPassword] = useState('');
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      navigation.navigate('Login');
-    }, 1000); // 5seconds
-
-    return () => clearTimeout(timeoutId);
-  }, [navigation]);
+      return () => clearTimeout(timeoutId);
+    },
+    [navigation]
+  );
 
   useFocusEffect(() => {
     const backAction = () => {
@@ -45,49 +29,28 @@ export const Splash = ({navigation}: any) => {
     };
 
     const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction,
+      "hardwareBackPress",
+      backAction
     );
 
     return () => backHandler.remove();
   });
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: colors.white,
-      }}>
-    <Text   style={{
-       fontSize:hp(5),fontWeight:'bold',color:colors.green
-      }}>GROWTECH</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>GROWTECH</Text>
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
-    backgroundColor: '#eaeaea',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.white,
   },
   title: {
-    marginTop: 16,
-    paddingVertical: 8,
-    borderWidth: 4,
-    borderColor: '#20232a',
-    borderRadius: 6,
-    backgroundColor: '#61dafb',
-    color: '#20232a',
-    textAlign: 'center',
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-  background: {
-    flex: 1,
-    alignItems: 'center',
-    width: '100%',
-    height: '100%',
-    resizeMode: 'contain',
+    fontSize: hp(5),
+    fontWeight: "bold",
+    color: colors.green,
   },
 });

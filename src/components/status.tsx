@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { View, Text, ScrollView, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { widthPercentageToDP } from "react-native-responsive-screen";
 import { colors } from "../theme/colors";
 import {
   widthPercentageToDP as wp,
-  heightPercentageToDP as hp
+  heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
 const Status = () => {
@@ -23,14 +23,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     padding: widthPercentageToDP(2.5),
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   h2: {
     color: colors.green,
     fontSize: hp(4),
     fontWeight: "bold",
-    textAlign: "left"
-  }
+    textAlign: "left",
+  },
 });
 
 export default Status;
